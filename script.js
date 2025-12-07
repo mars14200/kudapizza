@@ -75,34 +75,34 @@ document.addEventListener('DOMContentLoaded', function () {
             "Барбекью"
         ],
         [
-        "Реджанито",
-        "Моцарелла",
-        "Чеддер",
-        "С голубой плесенью",
-        "Смесь итальянских сыров",
-        "Мягкий молодой сыр"
+            "Реджанито",
+            "Моцарелла",
+            "Чеддер",
+            "С голубой плесенью",
+            "Смесь итальянских сыров",
+            "Мягкий молодой сыр"
         ],
         [
-        "Пепперони",
-        "Свинина",
-        "Ветчина",
-        "Бекон"
+            "Пепперони",
+            "Свинина",
+            "Ветчина",
+            "Бекон"
         ],
         [
-        "Креветка",
-        "Ананасы",
-        "Шампиньоны",
-        "Лук",
-        "Перец халапеньо",
-        "Орегано",
-        "Зеленый перец",
-        "Томаты",
-        "Чеснок",
-        "Красный перец",
-        "Оливки",
-        "Маслины",
-        "Клубника",
-        "Смесь итальянских трав"
+            "Креветка",
+            "Ананасы",
+            "Шампиньоны",
+            "Лук",
+            "Перец халапеньо",
+            "Орегано",
+            "Зеленый перец",
+            "Томаты",
+            "Чеснок",
+            "Красный перец",
+            "Оливки",
+            "Маслины",
+            "Клубника",
+            "Смесь итальянских трав"
         ]
     ];
 
@@ -123,7 +123,105 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         groups.innerHTML = groupHtml;
     }
+
+    //задача сгенерировать кнопки от 1 до 10 
+    //1.ищем на странице элемент .here
+    //2.проверяем нашли ли этот элемент 
+    //3. создаем перемнную для накопления html-кнопок 
+    //4. запускаем цикл от 1 до 10
+    //5.Наращиваем переменную html-кнопок с ипользованием текущего индекса
+    //6.После цикла вcтавляем полученный html в нужное место outerHtml
+
+
+    //const pagination = document.querySelector('.here');
+    //if (pagination) {
+    //let hereHtml = '';
+    //let = 'n';
+    // for (let i = 1; i <= 10; i = i + 1) {
+    //hereHtml = hereHtml + `<li>
+     //<a href="#" class="pagination__button">${i}</a></li>`
+    //}
+    //if (pagination) {
+   //for (let i = n; i >= 3; i = i + 1)  {
+    // hereHtml = hereHtml + `<li><span>${...}</span></li>`
+   //}
+    //}
+   // if (pagination) {
+    //for (let i = 10; i <= 8; i = i + 1) {
+    //hereHtml = hereHtml + `<li><a href="#" class="pagination__button">${i}</a></li>`
+    //}
+    //}
+    //pagination.outerHTML = hereHtml;
+
+    //задача 2 сгенерировать кнопки от т1 до 1000
+    //но выводить только первые три и последние три 
+    // между ними трим точки 
+
+    let categories = [
+        {
+            icon: 'icon-sale',
+            title: 'Акции',
+            isActive: true
+        },
+        {
+            icon: 'icon-pizza',
+            title: 'Пицца',
+            isActive: true
+        },
+        {
+            icon: 'icon-sushi',
+            title: 'Суши',
+            isActive: true
+        },
+        {
+            icon: 'icon-juice',
+            title: 'Сок',
+            isActive: true
+        },
+        {
+            icon: 'icon-snakes',
+            title: 'Снеки',
+            isActive: true
+        },
+        {
+            icon: 'icon-combo',
+            title: 'Комбо',
+            isActive: true
+        },
+        {
+            icon: 'icon-desert',
+            title: 'Десерт',
+            isActive: true
+        },
+        {
+            icon: 'icon-souce',
+            title: 'Соус',
+            isActive: true
+        },
+    ];
+
+    let categoriesList = document.querySelector('.categories__list');
+    if (categoriesList) {
+        let categoriesHtml = '';
+        categories.forEach(function (category) {
+            let isActive = '';
+            if (category.isActive)
+categoriesHtml = categoriesHtml + `<li>
+                         <a href="#" class="active">
+                            <svg width="24" height="24">
+                                <use xlink:href="images/icons/sprite.svg#icon-sale" />
+                                svg xlink:href="images/icons/sprite.
+                                svg#${category.icon}
+                            </svg>
+                            ${category.title}
+                        </a>
+                      </li>`;
+        });
+        categoriesList.innerHTML = categoriesHtml;
+    }
 });
+
+
 
 
 //let m = [5, 4, 5, 2];
@@ -134,4 +232,18 @@ document.addEventListener('DOMContentLoaded', function () {
 //console.log(m[10])
 //m.push(588)
 //m.length
+
+let pizzas = [
+
+];
+let pizza = {
+    img: 'images/img1',
+    title: 'Пицца',
+    oldPrice: 600,
+    newPrice: 300,
+    isHit: true
+};
+
+//pizza ['img']
+pizza.title
 
