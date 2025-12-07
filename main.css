@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-   /* border: 1px solid red; */
+    /* border: 1px solid red; */
 }
 
 :root {
@@ -162,8 +162,14 @@ body {
     width: 520px;
     height: 100%;
     overflow: auto;
+    transform: translateX(520px);
+    transition: transform .3s;
     /* right: 0; */
     /* position: absolute; */
+}
+
+.popup-filter--active .popup-filter__body {
+    transform: translateX(0px);
 }
 
 .popup-filter__content {
@@ -211,8 +217,7 @@ body {
 }
 
 .popup-filter__checkbox button,
-.popup-filter__buttons button
- {
+.popup-filter__buttons button {
     background-color: #fff;
     color: var(--hello);
     padding: 11px 16px;
@@ -227,15 +232,13 @@ body {
 
 .popup-filter__checkbox button:hover,
 .popup-filter__buttons button:hover,
-.popup-filter__buttons button.hover
- {
+.popup-filter__buttons button.hover {
     color: #FF7010;
     border: 1px solid #FF7010;
 }
 
 .popup-filter__checkbox button.active,
-.popup-filter__buttons button.active
-{
+.popup-filter__buttons button.active {
     background-color: #FF7010;
     color: #fff;
     border: 1px solid #FF7010;
@@ -252,6 +255,8 @@ body {
     flex-grow: 1;
 }
 
-
+.popup-filter__close {
+    cursor: pointer;
+}
 
 /* End Popup */
