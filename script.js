@@ -133,27 +133,38 @@ document.addEventListener('DOMContentLoaded', function () {
     //6.После цикла вcтавляем полученный html в нужное место outerHtml
 
 
-    //const pagination = document.querySelector('.here');
-    //if (pagination) {
-    //let hereHtml = '';
-    //let = 'n';
-    // for (let i = 1; i <= 10; i = i + 1) {
-    //hereHtml = hereHtml + `<li>
-     //<a href="#" class="pagination__button">${i}</a></li>`
-    //}
-    //if (pagination) {
-   //for (let i = n; i >= 3; i = i + 1)  {
-    // hereHtml = hereHtml + `<li><span>${...}</span></li>`
-   //}
-    //}
-   // if (pagination) {
-    //for (let i = 10; i <= 8; i = i + 1) {
-    //hereHtml = hereHtml + `<li><a href="#" class="pagination__button">${i}</a></li>`
-    //}
-    //}
-    //pagination.outerHTML = hereHtml;
 
-    //задача 2 сгенерировать кнопки от т1 до 1000
+const pagination = document.querySelector('.here');
+ //for (let i = 1; i <= 10; i++) {
+        //hereHtml = hereHtml +  `<li><a href="#" class="pagination__button">${i}</a></li>`;
+    //}
+  
+   // if (pagination) {
+    //let html = '';
+    //const total = 1000;
+
+//if (pagination) {
+    //let hereHtml = '';
+
+    // первые три
+    for (let i = 1; i <= 3; i++) {
+        hereHtml = hereHtml + `<li><a href="#" class="pagination__button">${i}</a></li>`
+    }
+
+    // троеточие
+    hereHtml = hereHtml + `<li><span>...</span></li>`;
+
+    // последние три
+    for (let i = total - 2; i <= total; i++) {
+        hereHtml = hereHtml + `<li><a href="#" class="pagination__button">${i}</a></li>`
+    };
+
+    pagination.outerHTML = hereHtml;
+});
+
+
+
+    //задача 2; сгенерировать кнопки от т1 до 1000
     //но выводить только первые три и последние три 
     // между ними трим точки 
 
@@ -200,26 +211,25 @@ document.addEventListener('DOMContentLoaded', function () {
         },
     ];
 
-    let categoriesList = document.querySelector('.categories__list');
+     let categoriesList = document.querySelector('.categories__list');
     if (categoriesList) {
         let categoriesHtml = '';
         categories.forEach(function (category) {
             let isActive = '';
-            if (category.isActive)
-categoriesHtml = categoriesHtml + `<li>
-                         <a href="#" class="active">
+            if (category.isActive == true) {
+                isActive = 'active';
+            }
+            categoriesHtml = categoriesHtml + `<li>
+                        <a href="#" class="${isActive}">
                             <svg width="24" height="24">
-                                <use xlink:href="images/icons/sprite.svg#icon-sale" />
-                                svg xlink:href="images/icons/sprite.
-                                svg#${category.icon}
+                                <use xlink:href="images/icons/sprite.svg#${category.icon}" />
                             </svg>
                             ${category.title}
                         </a>
-                      </li>`;
+                    </li>`
         });
-        categoriesList.innerHTML = categoriesHtml;
-    }
-});
+        categoriesList.innerHTMLHTML = categoriesHtml;
+    };
 
 
 
@@ -233,17 +243,36 @@ categoriesHtml = categoriesHtml + `<li>
 //m.push(588)
 //m.length
 
-let pizzas = [
+// let pizzas = [
+//     {
+//         title: '2'
+//     },
+//     {
+//         title: '1',
+//         img: '343',
+//     },
+//     {
+//         title: '3'
+//     },
+//     {
+//         title: '2'
+//     },
+// ];
 
-];
+// pizzas[0].title;
+
 let pizza = {
     img: 'images/img1',
     title: 'Пицца',
     oldPrice: 600,
     newPrice: 300,
-    isHit: true
+    isHit: true,
+    history: [
+        699, 650, 600, 700
+    ]
 };
 
-//pizza ['img']
-pizza.title
-
+// // pizza['img']
+// alert(pizza.title);
+// pizza.title = 'Пицца Моцарелла';
+// pizza.isFavorite = true;
