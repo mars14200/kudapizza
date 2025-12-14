@@ -1,36 +1,24 @@
-// выводит окошко на экран
-// alert('222');
-
-// Только раскрытие текста
-// document.querySelector('.info__link').addEventListener('click', function () {
-//     this.remove()
-//     document.querySelector('.info__text').classList.add('info__text--active');
-// })
-
-let buttonText;
-let buttonText2 = "Скрыть текст";
-
-// Раскрытие-сворачивание
-// document.querySelector('.info__link').addEventListener('click', function () {
-//     document.querySelector('.info__text').classList.toggle('info__text--active');
-//     if (this.textContent == 'Показать полностью') {
-//         this.textContent = "Скрыть текст";
-//     } else {
-//         this.textContent = "Показать полностью";
-//     }
-// })
-
-document.querySelector('.info__link').addEventListener('click', function () {
-    document.querySelector('.info__text').classList.toggle('info__text--active');
-    buttonText = this.textContent;
-    this.textContent = buttonText2;
-    buttonText2 = buttonText;
-})
+let totalCart = 0;
 
 // ждем полной загрузки страницы
 document.addEventListener('DOMContentLoaded', function () {
-    const popupFilter = document.querySelector('.popup-filter');
 
+    // раскрытие текста в блоке info
+    const infoLink = document.querySelector('.info__link')
+    if (infoLink) {
+        infoLink.addEventListener('click', function () {
+            const infoText = document.querySelector('.info__text')
+            if (infoText) {
+                infoText.classList.toggle('info__text--active');
+                let buttonText = this.textContent;
+                this.textContent = this.dataset.hello;
+                this.dataset.hello = buttonText;
+            }
+        })
+    }
+
+    // открытие попапа фильтра
+    const popupFilter = document.querySelector('.popup-filter');
     if (popupFilter) {
         const buttonPopup = document.querySelector('.catalog__filter');
         if (buttonPopup) {
@@ -55,20 +43,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    let titles = [
+    // формирование групп фильтров в попапе
+    const titles = [
         "Общее",
         "Сыр",
         "Мясо",
         "Компонент"
     ];
 
-    let buttons = [
+    const buttons = [
         [
-            "Хит",
-            "Новинка",
+            "Супер хит",
+            'Новинка',
             "С мясом",
             "Вегетарианская",
-            "С Курицей",
+            "С курицей",
             "Без лука",
             "С грибами",
             "С морепродуктами",
@@ -80,13 +69,17 @@ document.addEventListener('DOMContentLoaded', function () {
             "Чеддер",
             "С голубой плесенью",
             "Смесь итальянских сыров",
-            "Мягкий молодой сыр"
+            "Мягкий молодой сыр лука",
         ],
         [
             "Пепперони",
             "Свинина",
             "Ветчина",
-            "Бекон"
+            "Бекон",
+            "Говядина",
+            "Чоризо",
+            "Колбаски",
+            "Куриная грудка",
         ],
         [
             "Креветка",
@@ -102,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
             "Оливки",
             "Маслины",
             "Клубника",
-            "Смесь итальянских трав"
+            "Смесь итальянских трав",
         ]
     ];
 
@@ -114,104 +107,81 @@ document.addEventListener('DOMContentLoaded', function () {
             for (let j = 0; j < buttons[i].length; j++) {
                 buttonsHtml = buttonsHtml + `<button>${buttons[i][j]}</button>`
             }
-            groupHtml = groupHtml + `<div class="popup-filter__group"> 
+            groupHtml = groupHtml + `<div class="popup-filter__group">
                         <h4>${titles[i]}</h4>
-                        <div class="popup-filter__checkbox"> 
-                        ${buttonsHtml}
+                        <div class="popup-filter__checkbox">
+                            ${buttonsHtml}
                         </div>
                     </div>`;
         }
         groups.innerHTML = groupHtml;
     }
 
-    //задача сгенерировать кнопки от 1 до 10 
-    //1.ищем на странице элемент .here
-    //2.проверяем нашли ли этот элемент 
-    //3. создаем перемнную для накопления html-кнопок 
-    //4. запускаем цикл от 1 до 10
-    //5.Наращиваем переменную html-кнопок с ипользованием текущего индекса
-    //6.После цикла вcтавляем полученный html в нужное место outerHtml
-
-
-
-const pagination = document.querySelector('.here');
- //for (let i = 1; i <= 10; i++) {
-        //hereHtml = hereHtml +  `<li><a href="#" class="pagination__button">${i}</a></li>`;
-    //}
-  
-   // if (pagination) {
-    //let html = '';
-    //const total = 1000;
-
-//if (pagination) {
-    //let hereHtml = '';
-
-    // первые три
-    for (let i = 1; i <= 3; i++) {
-        hereHtml = hereHtml + `<li><a href="#" class="pagination__button">${i}</a></li>`
+    // формирование пагинации
+    const n = 1000;
+    const here = document.querySelector('.here');
+    if (here) {
+        let paginationHtml = '';
+        for (let i = 1; i <= n; i++) {
+            if (i <= 3 || i > n - 3) {
+                paginationHtml = paginationHtml + `<li>
+                        <a href="#" class="pagination__button">${i}</a>
+                    </li>`;
+            }
+            if (i == 3) {
+                paginationHtml = paginationHtml + `<li>
+                        <span>...</span>
+                    </li>`;
+            }
+        }
+        here.outerHTML = paginationHtml;
     }
 
-    // троеточие
-    hereHtml = hereHtml + `<li><span>...</span></li>`;
-
-    // последние три
-    for (let i = total - 2; i <= total; i++) {
-        hereHtml = hereHtml + `<li><a href="#" class="pagination__button">${i}</a></li>`
-    };
-
-    pagination.outerHTML = hereHtml;
-});
-
-
-
-    //задача 2; сгенерировать кнопки от т1 до 1000
-    //но выводить только первые три и последние три 
-    // между ними трим точки 
-
-    let categories = [
+    // формирование категорий на главной странице
+    const categories = [
         {
-            icon: 'icon-sale',
+            icon: "icon-sale",
             title: 'Акции',
             isActive: true
         },
         {
-            icon: 'icon-pizza',
+            icon: "icon-pizza",
             title: 'Пицца',
-            isActive: true
+            isActive: false
         },
         {
-            icon: 'icon-sushi',
+            icon: "icon-sushi",
             title: 'Суши',
-            isActive: true
+            isActive: false
         },
         {
-            icon: 'icon-juice',
-            title: 'Сок',
-            isActive: true
+            icon: "icon-juice",
+            title: 'Напитки',
+            isActive: false
         },
         {
-            icon: 'icon-snakes',
-            title: 'Снеки',
-            isActive: true
+            icon: "icon-snakes",
+            title: 'Закуски',
+            isActive: false
         },
         {
-            icon: 'icon-combo',
+            icon: "icon-combo",
             title: 'Комбо',
-            isActive: true
+            isActive: false
         },
         {
-            icon: 'icon-desert',
-            title: 'Десерт',
-            isActive: true
+            icon: "icon-desert",
+            title: 'Десерты',
+            isActive: false
         },
         {
-            icon: 'icon-souce',
-            title: 'Соус',
-            isActive: true
+            icon: "icon-souce",
+            title: 'Соусы',
+            isActive: false
         },
     ];
 
-     let categoriesList = document.querySelector('.categories__list');
+    const categoriesList = document.querySelector('.categories__list');
     if (categoriesList) {
         let categoriesHtml = '';
         categories.forEach(function (category) {
@@ -220,7 +190,7 @@ const pagination = document.querySelector('.here');
                 isActive = 'active';
             }
             categoriesHtml = categoriesHtml + `<li>
-                        <a href="#" class="${isActive}">
+                        <a href="#" class="categories__link ${isActive}">
                             <svg width="24" height="24">
                                 <use xlink:href="images/icons/sprite.svg#${category.icon}" />
                             </svg>
@@ -228,51 +198,149 @@ const pagination = document.querySelector('.here');
                         </a>
                     </li>`
         });
-        categoriesList.innerHTMLHTML = categoriesHtml;
-    };
+        categoriesList.innerHTML = categoriesHtml;
+    }
+
+    let cartItems = [];
+
+    fetch("https://example.shaklein.dev/cart/").then(function (responce) {
+        return responce.json();
+    }).then(function (data) {
+        cartItems = data.cartItems;
+        renderCartItems();
+    });
+
+    function renderCartItems() {
+        const cartItemsBlock = document.querySelector('.cart__items');
+        if (cartItemsBlock) {
+            let cartItemsHtml = '';
+            cartItems.forEach(function (cartItem, itemIndex) {
+                cartItemsHtml += `<div class="cart__item">
+                                <div class="cart__item-about">
+                                    <img src="${cartItem.image}" alt="" class="cart__item-img">
+                                    <div class="cart__item-info">
+                                        <div class="cart__item-name">${cartItem.name}</div>
+                                        <div class="cart__item-desc">${cartItem.desc}</div>
+                                    </div>
+                                </div>
+                                <div class="cart__item-numbers">
+                                    <div class="cart__item-calc">
+                                        <button class="cart__item-minus" data-index="${itemIndex}">-</button>
+                                        <input type="number" value="${cartItem.quantity}"
+                                            class="cart__item-quantity" data-index="${itemIndex}">
+                                        <button class="cart__item-plus" data-index="${itemIndex}">+</button>
+                                    </div>
+                                    <div class="cart__item-sum">${(cartItem.price * cartItem.quantity).toLocaleString()} ₽</div>
+                                </div>
+                            </div>`;
+                totalCart += cartItem.price * cartItem.quantity;
+            });
+            renderTotalPrice(cartItems);
+            cartItemsBlock.innerHTML = cartItemsHtml;
+
+            const cartInputs = document.querySelectorAll('.cart__item-quantity');
+            if (cartInputs.length) {
+                cartInputs.forEach(function (cartInput) {
+                    cartInput.addEventListener('input', function () {
+                        if (this.value === '')
+                            this.value = 0;
+                        if (this.value > 999)
+                            this.value = 999;
+                        if (this.value < 0)
+                            this.value = 0;
+                        this.value = +this.value;
+                        const cartItemIndex = this.dataset.index;
+                        cartItems[cartItemIndex].quantity = this.value;
+
+                        const cartItem = cartItems[cartItemIndex];
+                        const total = cartItem.price * cartItem.quantity;
+
+                        const container = this.closest('.cart__item-numbers');
+                        const sumHtml = container.querySelector('.cart__item-sum');
+                        if (sumHtml) {
+                            sumHtml.textContent = total.toLocaleString() + ' ₽';
+                        }
+                        renderTotalPrice(cartItems);
+                    });
+                });
+            }
+        }
+    }
 
 
+    // увеличение и уменьшение количества товара
+    const cart = document.querySelector('.cart__items');
+    if (cart) {
+        cart.addEventListener('click', function (event) {
+            let buttonPlus = event.target.closest('.cart__item-plus');
+            if (buttonPlus) {
+                const productIndex = buttonPlus.dataset.index;
+                const cartItem = cartItems[productIndex];
+                const container = event.target.closest('.cart__item-numbers');
+                const cartInput = container.querySelector('.cart__item-quantity');
+                if (+cartInput.value < 999) {
+                    cartInput.value = +cartInput.value + 1;
+                    cartItems[productIndex].quantity = cartInput.value;
+                    // отобразить новую итоговую цену
+                    renderTotalPrice(cartItems);
+                }
+                const total = (+cartInput.value * cartItem.price);
+                container.querySelector('.cart__item-sum').textContent = total + ' ₽';
+            }
 
+            let buttonMinus = event.target.closest('.cart__item-minus');
+            if (buttonMinus) {
+                const productIndex = buttonMinus.dataset.index;
+                const cartItem = cartItems[productIndex];
+                const container = event.target.closest('.cart__item-numbers');
+                const cartInput = container.querySelector('.cart__item-quantity');
+                if (+cartInput.value > 0) {
+                    cartInput.value = +cartInput.value - 1;
+                    cartItems[productIndex].quantity = cartInput.value;
+                    // отобразить новую итоговую цену
+                    renderTotalPrice(cartItems);
+                }
+                const total = (+cartInput.value * cartItem.price);
+                container.querySelector('.cart__item-sum').textContent = total + ' ₽';
+            }
+        });
+    }
+    //отправка формы
+    const checkoutButton = document.querySelector('.checkout__button');
+    if (checkoutButton) {
+        checkoutButton.addEventListener('click', function () {
+            fetch("https://example.shaklein.dev/cart/", {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json;charset=utf-8"
+                },
+                body: JSON.stringify({
+                    cartItems: cartItems,
+                    name: "",
+                    phone: "",
+                    desc: "",
+                    price: "",
+                    quantity: ""
+                })
+            }).then(function (responce) {
+                return responce.json();
+            }).then(function (data) {
+                console.log(data);
+            });
+        });
+    }
+});
 
-//let m = [5, 4, 5, 2];
-//console.log(m[0])
-//m[1] = 7
-//console.log(m);
-//m[10] = 9
-//console.log(m[10])
-//m.push(588)
-//m.length
+const cartTotalHtml = document.querySelectorAll('.cartTotalHtml');
 
-// let pizzas = [
-//     {
-//         title: '2'
-//     },
-//     {
-//         title: '1',
-//         img: '343',
-//     },
-//     {
-//         title: '3'
-//     },
-//     {
-//         title: '2'
-//     },
-// ];
-
-// pizzas[0].title;
-
-let pizza = {
-    img: 'images/img1',
-    title: 'Пицца',
-    oldPrice: 600,
-    newPrice: 300,
-    isHit: true,
-    history: [
-        699, 650, 600, 700
-    ]
-};
-
-// // pizza['img']
-// alert(pizza.title);
-// pizza.title = 'Пицца Моцарелла';
-// pizza.isFavorite = true;
+function renderTotalPrice(items) {
+    totalCart = 0;
+    items.forEach(function (item) {
+        totalCart += item.price * item.quantity;
+    });
+    if (cartTotalHtml.length) {
+        cartTotalHtml.forEach(function (cartTotalItem) {
+            cartTotalItem.textContent = totalCart.toLocaleString()
+        });
+    }
+}
